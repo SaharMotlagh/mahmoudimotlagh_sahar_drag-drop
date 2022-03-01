@@ -1,11 +1,13 @@
 (() => {
 	// make the connection to the elements on the page
 	//that we want the user to interact with
-	const theButtons = document.querySelectorAll("#buttonHolder img"),
+	let theButtons = document.querySelectorAll("#buttonHolder img"),
 		  puzzlePieces = document.querySelectorAll(".puzzle-pieces *"), 
 	// * means all elemets in that class
 		  dropZones = document.querySelectorAll(".drop-zone"),
 		  theGameBoard = document.querySelector(".puzzle-board");
+
+	const piecePath = ["topLeft", "topRight", "bottomLeft", "bottomRight"]	  
 
 	// theButtons become these:
 	// [
@@ -14,11 +16,14 @@
 	// <img>
 	// ]
 
-	function changeBgImg() {
+	function changeImageSet() {
 		// debugger;//
 		let key = this.dataset.bgref;
 		console.log(key);
 		theGameBoard.style.backgroundImage = `url(images/backGround${key}.jpg)`;
+		piecePath.forEach((piece, index) => {
+			puzzlePieces[index].src = `images/${piece + key}.jpg`;
+		})
 		// `` => this is a java script template string. you can use it to writh a bit of inline javascript which will be interpreted at runtime.
 		// search for MDN javascript template string
 	}
@@ -53,7 +58,7 @@
 	
      // these are the "trigger" we want the user to use to fire off events
 
-	theButtons.forEach(button => button.addEventListener("click", changeBgImg));
+	theButtons.forEach(button => button.addEventListener("click", changeImageSet));
 	puzzlePieces.forEach(piece => piece.addEventListener("dragstart", startDrag));
 	dropZones.forEach(zone => {
 		zone.addEventListener("dragover", draggedOver);
