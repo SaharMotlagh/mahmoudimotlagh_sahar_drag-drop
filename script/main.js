@@ -15,7 +15,7 @@
 	// ]
 
 	function changeBgImg() {
-		//debugger;//
+		// debugger;//
 		let key = this.dataset.bgref;
 		console.log(key);
 		theGameBoard.style.backgroundImage = `url(images/backGround${key}.jpg)`;
