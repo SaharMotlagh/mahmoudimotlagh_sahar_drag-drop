@@ -5,7 +5,11 @@
 		  puzzlePieces = document.querySelectorAll(".puzzle-pieces *"), 
 	// * means all elemets in that class
 		  dropZones = document.querySelectorAll(".drop-zone"),
-		  theGameBoard = document.querySelector(".puzzle-board");
+		  theGameBoard = document.querySelector(".puzzle-board"),
+
+		  ////refresh
+		  back = document.getElementsByClassName(".puzzle-pieces *");
+		  //////
 
 	const piecePath = ["topLeft", "topRight", "bottomLeft", "bottomRight"]	  
 
@@ -23,7 +27,7 @@
 		theGameBoard.style.backgroundImage = `url(images/backGround${key}.jpg)`;
 		piecePath.forEach((piece, index) => {
 			puzzlePieces[index].src = `images/${piece + key}.jpg`;
-		})
+		});
 		// `` => this is a java script template string. you can use it to writh a bit of inline javascript which will be interpreted at runtime.
 		// search for MDN javascript template string
 	}
@@ -35,15 +39,20 @@
 		event.dataTransfer.setData("draggedElement", event.target.id);
 	}
 
-	function draggedOver(event)  {
+	function draggedOver(event) {
 		// event is the user event (a click, a drag, a drop)
 		// some elements have default behaviour (like an anchor tag) -> we need to block that behaviour
 		// and script our own
 		// that's what event.preventDefault() does -> override the default behaviour (block it)
 		event.preventDefault();
 		//console.log("dragged over me");
+
+		//////refresh
+		
+		//////
+		
 	}
-	function handleDrop(event)  {
+	function handleDrop(event) {
 		event.preventDefault();
 		//console.log("dropped on me");
 		// this rule is for dropping
@@ -54,7 +63,12 @@
 
 		// the "this" keyword is a refrence to the element you are dropping onto (or into)
 		this.appendChild(document.querySelector(`#${currentEl}`));
+
+		//////refresh
+		console.log(back.draggedElement, startDrag);
+		//////
 	}
+	
 	
      // these are the "trigger" we want the user to use to fire off events
 
@@ -64,4 +78,7 @@
 		zone.addEventListener("dragover", draggedOver);
 		zone.addEventListener("drop", handleDrop);
 	});
+	/////refresh
+	dropZones.forEach(button => button.addEventListener("click", back));
+	/////////
 })();
