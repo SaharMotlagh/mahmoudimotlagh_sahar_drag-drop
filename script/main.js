@@ -8,8 +8,13 @@
 		  theGameBoard = document.querySelector(".puzzle-board"),
 
 		  ////refresh
-		  back = document.getElementsByClassName(".puzzle-pieces *");
+		  back = document.getElementsByClassName(".puzzle-pieces *"),
 		  //////
+
+		  //////placeHolder
+		  list = document.getElementsByClassName(puzzle-pieces);
+		  //////
+
 
 	const piecePath = ["topLeft", "topRight", "bottomLeft", "bottomRight"]	  
 
@@ -28,6 +33,10 @@
 		piecePath.forEach((piece, index) => {
 			puzzlePieces[index].src = `images/${piece + key}.jpg`;
 		});
+
+		//////
+
+		//////
 		// `` => this is a java script template string. you can use it to writh a bit of inline javascript which will be interpreted at runtime.
 		// search for MDN javascript template string
 	}
@@ -37,6 +46,11 @@
    // save a reference to the element we are dragging
    //this rule is for dragging
 		event.dataTransfer.setData("draggedElement", event.target.id);
+		
+		/*placeHolder
+		console.log(list.firstElementChild.theGameBoard.firstElementChild);
+		*/
+	
 	}
 
 	function draggedOver(event) {
@@ -48,7 +62,7 @@
 		//console.log("dragged over me");
 
 		//////refresh
-		
+		console.log(puzzle-puzzlePieces.firstElement.textContent);
 		//////
 		
 	}
@@ -63,11 +77,13 @@
 
 		// the "this" keyword is a refrence to the element you are dropping onto (or into)
 		this.appendChild(document.querySelector(`#${currentEl}`));
-
+         
 		//////refresh
 		console.log(back.draggedElement, startDrag);
 		//////
+		
 	}
+
 	
 	
      // these are the "trigger" we want the user to use to fire off events
