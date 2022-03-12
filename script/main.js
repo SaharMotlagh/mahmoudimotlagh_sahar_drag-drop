@@ -5,15 +5,10 @@
 		  puzzlePieces = document.querySelectorAll(".puzzle-pieces *"), 
 	// * means all elemets in that class
 		  dropZones = document.querySelectorAll(".drop-zone"),
-		  theGameBoard = document.querySelector(".puzzle-board"),
+		  dragBoard = document.querySelector("puzzle-pieces"),
+		  theGameBoard = document.querySelector(".puzzle-board");
 
-		  ////refresh
-		  back = document.getElementsByClassName(".puzzle-pieces *"),
-		  //////
-
-		  //////placeHolder
-		  list = document.getElementsByClassName(puzzle-pieces);
-		  //////
+		 
 
 
 	const piecePath = ["topLeft", "topRight", "bottomLeft", "bottomRight"]	  
@@ -27,6 +22,11 @@
 
 	function changeImageSet() {
 		// debugger;//
+		dropZones.forEach(zone => {
+			if (zone.childElementCount > 0) {
+				dragBoard.appendChild(zone.firstChild)
+			}
+		})
 		let key = this.dataset.bgref;
 		console.log(key);
 		theGameBoard.style.backgroundImage = `url(images/backGround${key}.jpg)`;
@@ -34,9 +34,7 @@
 			puzzlePieces[index].src = `images/${piece + key}.jpg`;
 		});
 
-		//////
-
-		//////
+		
 		// `` => this is a java script template string. you can use it to writh a bit of inline javascript which will be interpreted at runtime.
 		// search for MDN javascript template string
 	}
@@ -47,9 +45,7 @@
    //this rule is for dragging
 		event.dataTransfer.setData("draggedElement", event.target.id);
 		
-		/*placeHolder
-		console.log(list.firstElementChild.theGameBoard.firstElementChild);
-		*/
+		
 	
 	}
 
@@ -60,14 +56,14 @@
 		// that's what event.preventDefault() does -> override the default behaviour (block it)
 		event.preventDefault();
 		//console.log("dragged over me");
+		
 
-		//////refresh
-		console.log(puzzle-puzzlePieces.firstElement.textContent);
-		//////
+		
 		
 	}
 	function handleDrop(event) {
 		event.preventDefault();
+		
 		//console.log("dropped on me");
 		// this rule is for dropping
 		let currentEl = event.dataTransfer.getData("draggedElement");
@@ -78,9 +74,7 @@
 		// the "this" keyword is a refrence to the element you are dropping onto (or into)
 		this.appendChild(document.querySelector(`#${currentEl}`));
          
-		//////refresh
-		console.log(back.draggedElement, startDrag);
-		//////
+	
 		
 	}
 
@@ -94,7 +88,5 @@
 		zone.addEventListener("dragover", draggedOver);
 		zone.addEventListener("drop", handleDrop);
 	});
-	/////refresh
-	dropZones.forEach(button => button.addEventListener("click", back));
-	/////////
+	
 })();
